@@ -1,0 +1,6 @@
+fastapi
+urllib3
+uvicorn
+faker
+numpy
+shapely

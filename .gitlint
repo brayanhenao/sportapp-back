@@ -1,0 +1,6 @@
+# Ensure every title starts with a user-story identifier like US123
+[title-match-regex]
+regex=^PSA[1-9][0-9]*
+# Only allow email addresses from a uniandes.edu.co domain
+[author-valid-email]
+regex=[^@]+@uniandes.edu.co

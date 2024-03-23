@@ -1,0 +1,10 @@
+boto3
+botocore
+fastapi
+psycopg2-binary
+pydantic
+pydantic_core
+SQLAlchemy
+urllib3
+uvicorn
+firebase_admin

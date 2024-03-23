@@ -1,0 +1,7 @@
+boto3
+botocore
+polling
+requests
+fastapi
+urllib3
+uvicorn
