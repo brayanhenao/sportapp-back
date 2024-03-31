@@ -17,7 +17,7 @@ class NutritionalPlanService:
 
     def notify_caloric_intake(self, user_id: UUID4, caloric_intake: CaloricIntake):
         sqs = AWSClient().sqs
-        sqs.send_message(self.notification_queue, json.dumps(
-            CaloricIntakeMessage(user_id=user_id,
-                                 message=f'You have {caloric_intake.calories} left to consume').__dict__
-        ))
+        sqs.send_message(
+            self.notification_queue,
+            json.dumps(CaloricIntakeMessage(user_id=user_id, message=f"You have {caloric_intake.calories} left to consume").__dict__),
+        )

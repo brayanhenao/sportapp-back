@@ -57,4 +57,3 @@ services:
       - all
     depends_on:
       - mock
-

@@ -21,9 +21,9 @@ async def register_device(user_device: UserAlertDeviceCreate, db: Session = Depe
         {
             "user_id": str(alert_created.user_id),
             "device_token": alert_created.device_token,
-            "enabled": alert_created.enabled
+            "enabled": alert_created.enabled,
         },
-        status_code=201
+        status_code=201,
     )
 
 
@@ -31,33 +31,18 @@ async def register_device(user_device: UserAlertDeviceCreate, db: Session = Depe
 async def remove_user_device(user_id: str, device_token: str, db: Session = Depends(get_db)):
     alert_service = AlertService(db)
     removed = alert_service.remove_user_device(user_id, device_token)
-    return JSONResponse(
-        {
-            "removed": removed
-        },
-        status_code=200
-    )
+    return JSONResponse({"removed": removed}, status_code=200)
 
 
 @router.put("/{user_id}/disable-device")
 async def disable_user_device(user_id: str, device_token: str, db: Session = Depends(get_db)):
     alert_service = AlertService(db)
     disabled = alert_service.disable_user_device(user_id, device_token)
-    return JSONResponse(
-        {
-            "disabled": disabled
-        },
-        status_code=200
-    )
+    return JSONResponse({"disabled": disabled}, status_code=200)
 
 
 @router.get("/{user_id}/devices")
 async def get_user_devices(user_id: str, db: Session = Depends(get_db)):
     alert_service = AlertService(db)
     devices = alert_service.get_user_devices(user_id)
-    return JSONResponse(
-        {
-            "devices": devices
-        },
-        status_code=200
-    )
+    return JSONResponse({"devices": devices}, status_code=200)

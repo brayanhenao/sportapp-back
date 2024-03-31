@@ -21,7 +21,7 @@ class SportSessionService:
             start_time=datetime.now(),
             active=True,
             latitude=sport_session_data.latitude,
-            longitude=sport_session_data.longitude
+            longitude=sport_session_data.longitude,
         )
         self.db.add(sport_session)
         self.db.commit()
@@ -34,14 +34,13 @@ class SportSessionService:
             "start_time": sport_session.start_time.isoformat(),
             "active": sport_session.active,
             "latitude": sport_session.latitude,
-            "longitude": sport_session.longitude
+            "longitude": sport_session.longitude,
         }
 
         return return_sport_session
 
     def finish_sport_session(self, sport_session_id: UUID4, calories: float):
-        sport_session = self.db.query(SportSession).filter(SportSession.sport_session_id == sport_session_id).filter(
-            SportSession.active).first()
+        sport_session = self.db.query(SportSession).filter(SportSession.sport_session_id == sport_session_id).filter(SportSession.active).first()
         if not sport_session:
             raise NotFoundError(f"Sport session {sport_session_id} not found")
         sport_session.active = False
@@ -59,14 +58,13 @@ class SportSessionService:
             "calories": sport_session.calories,
             "active": sport_session.active,
             "latitude": sport_session.latitude,
-            "longitude": sport_session.longitude
+            "longitude": sport_session.longitude,
         }
 
         return return_sport_session
 
     def update_sport_session_location(self, sport_session_id: UUID4, location_data: SportSessionLocationUpdate):
-        sport_session = self.db.query(SportSession).filter(SportSession.sport_session_id == sport_session_id).filter(
-            SportSession.active).first()
+        sport_session = self.db.query(SportSession).filter(SportSession.sport_session_id == sport_session_id).filter(SportSession.active).first()
         if not sport_session:
             raise NotFoundError(f"Sport session {sport_session_id} not found")
         sport_session.latitude = location_data.latitude
@@ -81,7 +79,7 @@ class SportSessionService:
             "start_time": sport_session.start_time.isoformat(),
             "active": sport_session.active,
             "latitude": sport_session.latitude,
-            "longitude": sport_session.longitude
+            "longitude": sport_session.longitude,
         }
 
         return return_sport_session
@@ -90,8 +88,7 @@ class SportSessionService:
         sport_sessions = self.db.query(SportSession).filter(SportSession.active).all()
         users_locations = []
         for sport_session in sport_sessions:
-            sport_session_location = SportSessionLocation(sport_session.user_id, sport_session.latitude,
-                                                          sport_session.longitude)
+            sport_session_location = SportSessionLocation(sport_session.user_id, sport_session.latitude, sport_session.longitude)
             users_locations.append(sport_session_location)
 
         return [sport_session_location.to_dict() for sport_session_location in users_locations]
@@ -108,7 +105,7 @@ class SportSessionService:
                 "calories": sport_session.calories,
                 "active": sport_session.active,
                 "latitude": sport_session.latitude,
-                "longitude": sport_session.longitude
+                "longitude": sport_session.longitude,
             }
             for sport_session in sport_sessions
         ]

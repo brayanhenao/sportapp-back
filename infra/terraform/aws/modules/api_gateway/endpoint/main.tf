@@ -13,4 +13,3 @@ resource "aws_api_gateway_integration" "endpoint_integration" {
   type                    = var.integration_type
   uri                     = var.integration_uri
 }
-

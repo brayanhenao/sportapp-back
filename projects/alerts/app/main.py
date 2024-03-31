@@ -28,10 +28,7 @@ async def shutdown_event():
 
 @app.exception_handler(NotFoundError)
 async def not_found_error_handler(request, exc):
-    return JSONResponse(
-        status_code=404,
-        content={"message": str(exc)}
-    )
+    return JSONResponse(status_code=404, content={"message": str(exc)})
 
 
 @app.get("/ping")

@@ -19,15 +19,14 @@ class AdverseIncidentsService:
 
     def _get_users_affected_by_incident(self, incident: AdverseIncident):
         try:
-            user_locations = requests.get(f'{Config.SPORT_SESSION_URL}/active-sessions').json()
+            user_locations = requests.get(f"{Config.SPORT_SESSION_URL}/active-sessions").json()
         except Exception as e:
             print(f"Error: {e}")
             return []
         users_affected = []
         for user in user_locations:
-            if incident.latitude_from <= user['latitude'] <= incident.latitude_to and \
-                    incident.longitude_from <= user['longitude'] <= incident.longitude_to:
-                users_affected.append(user['user_id'])
+            if incident.latitude_from <= user["latitude"] <= incident.latitude_to and incident.longitude_from <= user["longitude"] <= incident.longitude_to:
+                users_affected.append(user["user_id"])
         return users_affected
 
     def _process_adverse_incident(self, incident: AdverseIncident):
@@ -38,9 +37,11 @@ class AdverseIncidentsService:
     def process_adverse_incidents(self, incidents: list):
         for incident in incidents:
             self._process_adverse_incident(
-                AdverseIncident(description=incident['description'],
-                                latitude_from=incident['bounding_box']['latitude_from'],
-                                longitude_from=incident['bounding_box']['longitude_from'],
-                                latitude_to=incident['bounding_box']['latitude_to'],
-                                longitude_to=incident['bounding_box']['longitude_to'])
+                AdverseIncident(
+                    description=incident["description"],
+                    latitude_from=incident["bounding_box"]["latitude_from"],
+                    longitude_from=incident["bounding_box"]["longitude_from"],
+                    latitude_to=incident["bounding_box"]["latitude_to"],
+                    longitude_to=incident["bounding_box"]["longitude_to"],
+                ),
             )

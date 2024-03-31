@@ -15,14 +15,9 @@ class UsersService:
         self.mapper = DataClassMapper(User)
 
     def register_user(self, user: UserCreate):
-        cognito_user_created = self.aws_client.cognito.create_user(
-            user=user
-        )
+        cognito_user_created = self.aws_client.cognito.create_user(user=user)
 
-        self.aws_client.cognito.set_permanent_password(
-            sub=cognito_user_created["User"]["Username"],
-            password=user.password
-        )
+        self.aws_client.cognito.set_permanent_password(sub=cognito_user_created["User"]["Username"], password=user.password)
 
         user_created = User()
         user_created.email = user.email
@@ -36,11 +31,7 @@ class UsersService:
         return self.mapper.to_dict(user_created)
 
     def login_user(self, user_login: UserCredentials):
-        response = self.aws_client.cognito.get_user_token(
-            refresh_token=user_login.refresh_token,
-            username=user_login.email,
-            password=user_login.password
-        )
+        response = self.aws_client.cognito.get_user_token(refresh_token=user_login.refresh_token, username=user_login.email, password=user_login.password)
 
         return response
 
@@ -58,5 +49,4 @@ class UsersService:
         self.db.commit()
         return self.mapper.to_dict(user)
 
-    def complete_user_registration(self, user_id: str):
-        ...
+    def complete_user_registration(self, user_id: str): ...

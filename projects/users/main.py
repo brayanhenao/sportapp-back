@@ -56,6 +56,7 @@ async def ping():
 
 # Experimentos:
 
+
 # Experimento 1 registro en base de datos directo
 @app.post("/user")
 async def create_user(user: UserCreate, db=Depends(get_db)):
@@ -67,6 +68,7 @@ async def create_user(user: UserCreate, db=Depends(get_db)):
 
 
 # Experimento 1.1 registro en base de datos directo con background tasks
+
 
 def _create_user(db, user):
     db.add(user)
@@ -92,11 +94,7 @@ users_success_by_email_map: Dict[str, User] = {}  # Mapa de usuarios con éxito 
 @app.post("/mock")
 async def root(user: UserCreate, db=Depends(get_db)):
     global users
-    user = User(
-        email=user.email,
-        first_name=user.first_name,
-        last_name=user.last_name
-    )
+    user = User(email=user.email, first_name=user.first_name, last_name=user.last_name)
     users.append(user)
     return {"message": user.__dict__}
 
@@ -115,7 +113,6 @@ async def syncdb(aws_client):
             for i, user in enumerate(repeated_users):
                 del process_users[i]
                 users_with_errors_by_email_map[user.email] = user
-
 
             # Cognito no permite crear usuarios en bulk, por lo que se debe crear uno por uno y esto es muy costoso
             # operacionalmente además de que posee un límite de 50 usuarios por llamada. Decisión final: No usar Cognito
@@ -174,6 +171,7 @@ async def startup():
 
 # Opciones de sincronizar estado con el cliente en Experimento 2
 
+
 # Experimento 2.1 (Polling), Obtener el estado de un usuario por email, (No recomendado)
 @app.get("/mock/{email}")
 async def result(email: str):
@@ -193,11 +191,7 @@ async def result(email: str):
 @app.post("/mock/stream")
 async def mock_stream(user: UserCreate):
     global users
-    user = User(
-        email=user.email,
-        first_name=user.first_name,
-        last_name=user.last_name
-    )
+    user = User(email=user.email, first_name=user.first_name, last_name=user.last_name)
     users.append(user)
 
     async def event_generator(user):

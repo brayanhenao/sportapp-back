@@ -2,6 +2,9 @@
 .idea/
 **/.idea/
 
+### Visual Studio Code ###
+.vscode/
+
 ### AWS ###
 **/aws_credentials
 **/gcloud-credentials.json

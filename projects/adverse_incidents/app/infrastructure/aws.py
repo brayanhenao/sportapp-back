@@ -16,8 +16,6 @@ class SQS:
 
 class AWSClient:
     def __init__(self):
-        self.session = boto3.Session(
-            region_name=Config.AWS_REGION
-        )
+        self.session = boto3.Session(region_name=Config.AWS_REGION)
 
         self.sqs = SQS(self.session)

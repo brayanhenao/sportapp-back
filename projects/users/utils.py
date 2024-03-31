@@ -27,38 +27,18 @@ class Cognito:
             Username=user.email,
             MessageAction="SUPPRESS",
             UserAttributes=[
-                {
-                    "Name": "email",
-                    "Value": user.email
-                },
-                {
-                    "Name": "email_verified",
-                    "Value": "True"
-                },
-                {
-                    "Name": "name",
-                    "Value": user.first_name
-                },
-                {
-                    "Name": "family_name",
-                    "Value": user.last_name
-                },
-                {
-                    "Name": "custom:user_id",
-                    "Value": str(user.user_id)
-                }
-            ]
+                {"Name": "email", "Value": user.email},
+                {"Name": "email_verified", "Value": "True"},
+                {"Name": "name", "Value": user.first_name},
+                {"Name": "family_name", "Value": user.last_name},
+                {"Name": "custom:user_id", "Value": str(user.user_id)},
+            ],
         )
 
         return response
 
     def set_permanent_password(self, email: str, password: str):
-        self.client.admin_set_user_password(
-            UserPoolId=self.user_pool_id,
-            Username=email,
-            Password=password,
-            Permanent=True
-        )
+        self.client.admin_set_user_password(UserPoolId=self.user_pool_id, Username=email, Password=password, Permanent=True)
 
     def refresh_token(self, refresh_token: str):
         response = self.client.initiate_auth(
@@ -66,7 +46,7 @@ class Cognito:
             AuthParameters={
                 "REFRESH_TOKEN": refresh_token,
             },
-            ClientId=self.client_id
+            ClientId=self.client_id,
         )
 
         login_response = {
@@ -85,19 +65,16 @@ class Cognito:
                 "USERNAME": username,
                 "PASSWORD": password,
             },
-            ClientId=self.client_id
+            ClientId=self.client_id,
         )
 
         login_response = {
             "access_token": response["AuthenticationResult"]["AccessToken"],
             "id_token": response["AuthenticationResult"]["IdToken"],
-            "refresh_token": response["AuthenticationResult"]["RefreshToken"]
+            "refresh_token": response["AuthenticationResult"]["RefreshToken"],
         }
 
         return login_response
 
     def delete_user(self, username: str):
-        self.client.admin_delete_user(
-            UserPoolId=self.user_pool_id,
-            Username=username
-        )
+        self.client.admin_delete_user(UserPoolId=self.user_pool_id, Username=username)

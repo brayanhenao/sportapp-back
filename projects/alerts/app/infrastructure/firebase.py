@@ -16,9 +16,7 @@ class FirebaseClient:
                 body=message,
             ),
             tokens=device_registration_token,
-            android=messaging.AndroidConfig(
-                priority=priority
-            ),
+            android=messaging.AndroidConfig(priority=priority),
         )
 
         messaging.send_each_for_multicast(message)

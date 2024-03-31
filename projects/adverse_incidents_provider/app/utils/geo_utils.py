@@ -2,8 +2,13 @@ from shapely import Point
 from shapely.geometry import Polygon
 import numpy as np
 
-cali_boundary_coords = [[-76.8635495958, 3.1194990575], [-76.8642836451, 3.8006769776], [-76.0888693083, 3.8015092147],
-                        [-76.088135259, 3.1203318932], [-76.8635495958, 3.1194990575]]
+cali_boundary_coords = [
+    [-76.8635495958, 3.1194990575],
+    [-76.8642836451, 3.8006769776],
+    [-76.0888693083, 3.8015092147],
+    [-76.088135259, 3.1203318932],
+    [-76.8635495958, 3.1194990575],
+]
 
 
 def generate_random_points(num_points, boundary_coords=None):
