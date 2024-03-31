@@ -12,22 +12,19 @@ router = APIRouter(
 
 
 @router.post("/")
-async def start_sport_session(sport_session: SportSessionStart,
-                              sport_session_service: SportSessionService = Depends()):
+async def start_sport_session(sport_session: SportSessionStart, sport_session_service: SportSessionService = Depends()):
     sport_session = sport_session_service.start_sport_session(sport_session)
     return JSONResponse(content=sport_session, status_code=201)
 
 
 @router.patch("/{sport_session_id}/finish")
-async def finish_sport_session(sport_session_id: str, calories: float,
-                               sport_session_service: SportSessionService = Depends()):
+async def finish_sport_session(sport_session_id: str, calories: float, sport_session_service: SportSessionService = Depends()):
     sport_session = sport_session_service.finish_sport_session(sport_session_id, calories)
     return JSONResponse(content=sport_session, status_code=200)
 
 
 @router.patch("/{sport_session_id}/location")
-async def update_sport_session_location(sport_session_id: str, location: SportSessionLocationUpdate,
-                                        sport_session_service: SportSessionService = Depends()):
+async def update_sport_session_location(sport_session_id: str, location: SportSessionLocationUpdate, sport_session_service: SportSessionService = Depends()):
     sport_session = sport_session_service.update_sport_session_location(sport_session_id, location)
     return JSONResponse(content=sport_session, status_code=200)
 

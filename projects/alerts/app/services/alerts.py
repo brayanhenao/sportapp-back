@@ -17,19 +17,14 @@ class AlertService:
             self.db = next(db)
 
     def register_device(self, alert_data: UserAlertDeviceCreate):
-        alert = UserAlertDevice(
-            user_id=alert_data.user_id,
-            device_token=alert_data.device_token,
-            enabled=alert_data.enabled
-        )
+        alert = UserAlertDevice(user_id=alert_data.user_id, device_token=alert_data.device_token, enabled=alert_data.enabled)
         self.db.add(alert)
         self.db.commit()
         self.db.refresh(alert)
         return alert
 
     def remove_user_device(self, user_id: UUID4, device_token: str):
-        device = self.db.query(UserAlertDevice).filter(UserAlertDevice.user_id == user_id).filter(
-            UserAlertDevice.device_token == device_token).first()
+        device = self.db.query(UserAlertDevice).filter(UserAlertDevice.user_id == user_id).filter(UserAlertDevice.device_token == device_token).first()
         if not device:
             raise NotFoundError(f"Device {device_token} not found for user {user_id}")
 
@@ -38,8 +33,7 @@ class AlertService:
         return True
 
     def disable_user_device(self, user_id: UUID4, device_token: str):
-        device = self.db.query(UserAlertDevice).filter(UserAlertDevice.user_id == user_id).filter(
-            UserAlertDevice.device_token == device_token).first()
+        device = self.db.query(UserAlertDevice).filter(UserAlertDevice.user_id == user_id).filter(UserAlertDevice.device_token == device_token).first()
         if not device:
             raise NotFoundError(f"Device {device_token} not found for user {user_id}")
         device.enabled = False

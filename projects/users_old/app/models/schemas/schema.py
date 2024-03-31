@@ -15,7 +15,7 @@ class UserCredentials(BaseModel):
     email: Optional[str] = None
     password: Optional[str] = None
 
-    @model_validator(mode='before')
+    @model_validator(mode="before")
     def validate_credentials(cls, values):
         refresh_token = values.get("refresh_token")
         email = values.get("email")

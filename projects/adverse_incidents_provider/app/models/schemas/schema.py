@@ -12,10 +12,10 @@ class BoundingBox:
 
     def to_dict(self):
         return {
-            'latitude_from': self.latitude_from,
-            'longitude_from': self.longitude_from,
-            'latitude_to': self.latitude_to,
-            'longitude_to': self.longitude_to
+            "latitude_from": self.latitude_from,
+            "longitude_from": self.longitude_from,
+            "latitude_to": self.latitude_to,
+            "longitude_to": self.longitude_to,
         }
 
 
@@ -28,7 +28,4 @@ class AdverseIncident:
         self.bounding_box = bounding_box
 
     def to_dict(self):
-        return {
-            'description': self.description,
-            'bounding_box': self.bounding_box.to_dict()
-        }
+        return {"description": self.description, "bounding_box": self.bounding_box.to_dict()}

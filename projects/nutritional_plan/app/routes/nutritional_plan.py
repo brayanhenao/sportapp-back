@@ -15,7 +15,6 @@ router = APIRouter(
 
 
 @router.post("/{user_id}/notify-caloric-intake")
-async def notify_caloric_intake(user_id: str, caloric_intake: CaloricIntake,
-                                alert_service: NutritionalPlanService = Depends()):
+async def notify_caloric_intake(user_id: str, caloric_intake: CaloricIntake, alert_service: NutritionalPlanService = Depends()):
     alert_service.notify_caloric_intake(user_id, caloric_intake)
     return JSONResponse(status_code=200, content={"message": "Notification sent successfully"})

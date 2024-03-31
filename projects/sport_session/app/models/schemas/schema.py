@@ -26,8 +26,4 @@ class SportSessionLocation:
         self.longitude = longitude
 
     def to_dict(self):
-        return {
-            "user_id": str(self.user_id),
-            "latitude": self.latitude,
-            "longitude": self.longitude
-        }
+        return {"user_id": str(self.user_id), "latitude": self.latitude, "longitude": self.longitude}

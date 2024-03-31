@@ -28,8 +28,7 @@ def process_queues():
             for message in adverse_incidents_queue.get("Messages", []):
                 body = json.loads(message["Body"])
                 print(f"Received adverse incident message: {body}")
-                publisher.send_alert(body["user_id"], "high", "Adverse Incident",
-                                     body["message"])
+                publisher.send_alert(body["user_id"], "high", "Adverse Incident", body["message"])
                 sqs.delete_message(adverse_incidents_queue_name, message)
         sleep(0.5)
 

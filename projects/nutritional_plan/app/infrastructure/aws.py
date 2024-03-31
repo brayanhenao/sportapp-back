@@ -18,15 +18,12 @@ class SQS:
         return messages
 
     def delete_message(self, queue_name: str, message):
-        self.sqs.delete_messages(QueueUrl=queue_name,
-                                 Entries=[{"Id": message.message_id, "ReceiptHandle": message.receipt_handle}])
+        self.sqs.delete_messages(QueueUrl=queue_name, Entries=[{"Id": message.message_id, "ReceiptHandle": message.receipt_handle}])
         print(f"Message deleted {message.body}")
 
 
 class AWSClient:
     def __init__(self):
-        self.session = boto3.Session(
-            region_name=Config.AWS_REGION
-        )
+        self.session = boto3.Session(region_name=Config.AWS_REGION)
 
         self.sqs = SQS(self.session)

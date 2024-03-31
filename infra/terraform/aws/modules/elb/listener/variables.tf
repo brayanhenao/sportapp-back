@@ -12,4 +12,3 @@ variable "listener_protocol" {
   description = "The protocol on which the load balancer is listening"
   type        = string
 }
-

@@ -6,14 +6,14 @@ from ..config.db import Base
 
 
 class Sport(enum.Enum):
-    RUNNING = 'running'
-    CYCLING = 'cycling'
-    SWIMMING = 'swimming'
-    WALKING = 'walking'
+    RUNNING = "running"
+    CYCLING = "cycling"
+    SWIMMING = "swimming"
+    WALKING = "walking"
 
 
 class SportSession(Base):
-    __tablename__ = 'sport_session'
+    __tablename__ = "sport_session"
     sport_session_id = Column(Uuid(as_uuid=True), primary_key=True, default=uuid4)
     user_id = Column(Uuid(as_uuid=True), nullable=False)
     sport = Column(Enum(Sport), nullable=False)

@@ -14,8 +14,7 @@ class AdverseIncident:
     latitude_to: float
     longitude_to: float
 
-    def __init__(self, description: str, latitude_from: float, longitude_from: float, latitude_to: float,
-                 longitude_to: float):
+    def __init__(self, description: str, latitude_from: float, longitude_from: float, latitude_to: float, longitude_to: float):
         self.description = description
         self.latitude_from = latitude_from
         self.longitude_from = longitude_from
