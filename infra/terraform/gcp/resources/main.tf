@@ -1,7 +1,6 @@
 provider "google" {
   project     = "sportapp-417820"
   region      = "us-central1"
-  credentials = "../../../../gcloud-credentials.json"
 }
 
 data "google_secret_manager_secret_version" "db_username" {
