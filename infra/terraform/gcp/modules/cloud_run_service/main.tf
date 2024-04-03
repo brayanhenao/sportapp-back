@@ -23,7 +23,7 @@ resource "google_cloud_run_v2_service" "run_service" {
         container_port = var.port
       }
       env {
-        name  = "DB_URL"
+        name  = "DATABASE_URL"
         value = var.env.db_url
       }
       env {

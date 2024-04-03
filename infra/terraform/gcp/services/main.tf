@@ -12,8 +12,8 @@ data "google_secret_manager_secret_version" "db_password" {
   secret = "projects/480619174578/secrets/DB_PASSWORD"
 }
 
-data "google_secret_manager_secret_version" "secret" {
-  secret = "projects/480619174578/secrets/JWT_SECRET_KEY"
+data "google_secret_manager_secret" "jwt_secret" {
+  secret_id = "JWT_SECRET_KEY"
 }
 
 data "google_service_account" "develop_service_account" {
@@ -39,7 +39,7 @@ module "users_service" {
     db_url      = "postgresql+psycopg2://${data.google_secret_manager_secret_version.db_username.secret_data}:${data.google_secret_manager_secret_version.db_password.secret_data}@/${data.terraform_remote_state.resources.outputs.database_name}?host=/cloudsql/${data.terraform_remote_state.resources.outputs.instance_connection_name}",
     db_instance = data.terraform_remote_state.resources.outputs.instance_connection_name
   }
-  jwt_secret_id = data.google_secret_manager_secret_version.secret.id
+  jwt_secret_id = data.google_secret_manager_secret.jwt_secret.id
 
   depends_on = [data.terraform_remote_state.resources]
 }
