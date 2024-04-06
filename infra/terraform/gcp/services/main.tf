@@ -24,7 +24,7 @@ data "terraform_remote_state" "resources" {
   config  = {
     organization = "MisoTeam"
     workspaces   = {
-      name = "resources"
+      name = "gcp-resources"
     }
   }
 }
