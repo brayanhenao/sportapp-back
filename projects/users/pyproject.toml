@@ -2,7 +2,7 @@
 name = "users"
 version = "0.1.0"
 description = ""
-authors = ["Brayan Henao <b.henaoc@uniandes.edu.co>"]
+authors = ["Miso Team"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
